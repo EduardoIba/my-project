@@ -24,6 +24,7 @@ test('Compras e Conferência compartilham estrutura e identidade de sidebar', ()
 test('opções do menu respeitam os perfis e permissões atuais', () => {
   const labels = (module, role) => sidebarOptions(module, role).map(item => item.label);
   assert.deepEqual(labels('buyer', 'comprador'), ['Painel', 'Nova solicitação', 'Solicitações', 'Relatórios', 'Configurações']);
+  assert.deepEqual(labels('buyer', 'administrador'), ['Painel', 'Nova solicitação', 'Solicitações', 'Relatórios', 'Configurações']);
   assert.deepEqual(labels('receiving', 'conferente'), ['Painel', 'Nova conferência', 'Histórico', 'Pendências', 'Relatórios']);
   assert.deepEqual(labels('receiving', 'administrador'), ['Painel', 'Nova conferência', 'Histórico', 'Pendências', 'Relatórios', 'Cadastro fiscal']);
   assert.deepEqual(labels('buyer', 'conferente'), []);
