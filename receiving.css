@@ -4,23 +4,7 @@
   min-height:100vh; display:grid; grid-template-columns:232px minmax(0,1fr);
   color:var(--rx-ink); background:var(--rx-bg); font-size:14px;
 }
-.rx-app .rx-sidebar {
-  position:sticky; top:0; height:100dvh; width:auto; display:flex; flex-direction:column;
-  padding:24px 12px; background:var(--rx-nav); color:#fff;
-}
-:where(.rx-app) .rx-brand {display:flex; align-items:center; gap:10px; padding:4px 5px 28px}
-:where(.rx-app) .rx-brand>span {display:grid; place-items:center; width:36px; height:40px; flex:none; border-radius:10px; background:var(--rx-blue); font-weight:800}
-:where(.rx-app) .rx-brand strong {display:block; font-size:13px}
-:where(.rx-app) .rx-brand small,:where(.rx-app) .rx-profile small {display:block; margin-top:4px; color:#b8c9e1; font-size:11px}
-:where(.rx-app) .rx-sidebar nav {display:grid; gap:4px; overflow:visible}
-:where(.rx-app) .rx-sidebar nav button {width:100%; padding:12px 13px; color:#f5f8fe; border:0; background:transparent; text-align:left; border-radius:9px; font-weight:500; font-size:13px}
-:where(.rx-app) .rx-sidebar nav button[aria-current],:where(.rx-app) .rx-sidebar nav button:hover {background:#293e5d;color:#fff}
-:where(.rx-app) .rx-sidebar-label {margin:34px 12px 16px; color:#b4c5de; font-size:10px; text-transform:uppercase}
-:where(.rx-app) .rx-profile {margin-top:auto; background:#293e5d; border-radius:9px; padding:10px 12px; font-size:12px}
-:where(.rx-app) .rx-profile>div {display:flex; align-items:center; justify-content:space-between; gap:8px}
-:where(.rx-app) .rx-profile button {display:inline-flex; align-items:center; gap:7px; color:#f1f6ff; background:none; border:0; padding:5px 0; font-size:12px}
-:where(.rx-app) .rx-profile>button {width:100%; justify-content:space-between; margin-bottom:7px; border-bottom:1px solid #ffffff25; padding-bottom:8px}
-:where(.rx-app) .rx-profile button:hover {text-decoration:underline}
+:where(.rx-app) .il-sidebar {background:var(--rx-nav)}
 .rx-app .rx-main {width:100%; max-width:1600px; margin:0 auto; padding:32px clamp(20px,3vw,52px) 32px}
 .rx-app .rx-header {display:flex; flex-direction:row; align-items:center; gap:18px; justify-content:space-between; margin:0 0 28px}
 :where(.rx-app) .rx-header h1 {font-size:clamp(26px,3vw,34px); letter-spacing:-.025em; margin:11px 0 6px; line-height:1.12}
@@ -140,21 +124,13 @@
   :where(.rx-app) .rx-product-head,:where(.rx-app) .rx-product-data {grid-template-columns:minmax(0,1fr) 36px 65px 63px}
 }
 @media(max-width:860px) {
-  .rx-app {grid-template-columns:152px minmax(0,1fr)}
+  .rx-app {grid-template-columns:232px minmax(0,1fr)}
   :where(.rx-app) .rx-inspection-grid,:where(.rx-app) .rx-catalog {grid-template-columns:1fr}
   :where(.rx-app) .rx-note-summary {grid-template-columns:1fr 1fr}
   :where(.rx-app) .rx-guide ol {gap:13px}
 }
 @media(max-width:640px) {
   .rx-app {display:block}
-  .rx-app .rx-sidebar {position:static; height:auto; padding:11px 12px; display:grid; grid-template-columns:1fr auto; gap:9px}
-  :where(.rx-app) .rx-brand {padding:0; gap:7px}
-  :where(.rx-app) .rx-brand>span {width:32px;height:34px}
-  :where(.rx-app) .rx-sidebar nav {grid-row:2; grid-column:1/-1; display:flex; flex-wrap:wrap; gap:4px; padding:2px 1px}
-  :where(.rx-app) .rx-sidebar nav button {width:auto; padding:9px 10px; font-size:12px}
-  :where(.rx-app) .rx-sidebar-label,:where(.rx-app) .rx-profile small {display:none}
-  :where(.rx-app) .rx-profile {display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:8px; padding:5px 8px; align-self:center}
-  :where(.rx-app) .rx-profile>button {width:auto; border:0; margin:0; padding:5px 0}
   .rx-app .rx-main {padding:19px 12px}
   .rx-app .rx-header {align-items:start; gap:10px; margin-bottom:17px}
   :where(.rx-app) .rx-header h1 {font-size:23px}
@@ -171,7 +147,7 @@
 }
 @media print {
   .rx-app {display:block; background:#fff}
-  :where(.rx-app) .rx-sidebar,:where(.rx-app) .rx-export,:where(.rx-app) .rx-tabs,:where(.rx-app) .rx-filter-card,.rx-app button,:where(.rx-app) .rx-issues form {display:none!important}
+  :where(.rx-app) .il-sidebar,:where(.rx-app) .rx-export,:where(.rx-app) .rx-tabs,:where(.rx-app) .rx-filter-card,.rx-app button,:where(.rx-app) .rx-issues form {display:none!important}
   .rx-app .rx-main {padding:0}
   :where(.rx-app) .rx-card,:where(.rx-app) .rx-stat {break-inside:avoid}
   :where(.rx-app) .rx-table-wrap {overflow:visible}
