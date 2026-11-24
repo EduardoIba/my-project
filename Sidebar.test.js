@@ -11,12 +11,14 @@ const render = props => renderToStaticMarkup(React.createElement(Sidebar, props)
 
 test('Compras e Conferência compartilham estrutura e identidade de sidebar', () => {
   const shared = ['il-sidebar-brand', 'IMPORT LASER', 'Gestão de Compras', 'il-sidebar-label', 'il-sidebar-profile'];
-  const buyer = render({items: [{id: 'Painel', label: 'Painel'}], active: 'Painel', moduleLabel: 'Módulo de compras', roleLabel: 'Administrador', accessLabel: 'Acesso Master'});
+  const buyer = render({items: [{id: 'Painel', label: 'Painel'}], active: 'Painel', moduleLabel: 'Módulo de compras', roleLabel: 'Comprador', accessLabel: 'Acesso operacional'});
   const receiving = render({items: [{id: 'new', label: 'Nova conferência'}], active: 'new', moduleLabel: 'Módulo de conferência', roleLabel: 'Conferente', accessLabel: 'Acesso operacional'});
   for (const marker of shared) {
     assert.ok(buyer.includes(marker), `Compras inclui ${marker}`);
     assert.ok(receiving.includes(marker), `Conferência inclui ${marker}`);
   }
+  assert.match(buyer, /Comprador/);
+  assert.match(buyer, /Acesso operacional/);
 });
 
 test('opções e tela ativa vêm do módulo/perfil informado', () => {
