@@ -6,7 +6,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {createServer} from 'vite';
 
 const vite = await createServer({configFile: false, appType: 'custom', server: {middlewareMode: true}});
-const {default: Sidebar} = await vite.ssrLoadModule('/Sidebar.jsx');
+const {default: Sidebar, sidebarOptions} = await vite.ssrLoadModule('/Sidebar.jsx');
 const render = props => renderToStaticMarkup(React.createElement(Sidebar, props));
 
 test('Compras e Conferência compartilham estrutura e identidade de sidebar', () => {
@@ -21,12 +21,22 @@ test('Compras e Conferência compartilham estrutura e identidade de sidebar', ()
   assert.match(buyer, /Acesso operacional/);
 });
 
-test('opções e tela ativa vêm do módulo/perfil informado', () => {
-  const markup = render({items: [{id: 'new', label: 'Nova conferência'}, {id: 'catalog', label: 'Cadastro fiscal'}], active: 'catalog', moduleLabel: 'Módulo de conferência', roleLabel: 'Administrador', accessLabel: 'Acesso Master'});
+test('opções do menu respeitam os perfis e permissões atuais', () => {
+  const labels = (module, role) => sidebarOptions(module, role).map(item => item.label);
+  assert.deepEqual(labels('buyer', 'comprador'), ['Painel', 'Nova solicitação', 'Solicitações', 'Relatórios', 'Configurações']);
+  assert.deepEqual(labels('receiving', 'conferente'), ['Painel', 'Nova conferência', 'Histórico', 'Pendências', 'Relatórios']);
+  assert.deepEqual(labels('receiving', 'administrador'), ['Painel', 'Nova conferência', 'Histórico', 'Pendências', 'Relatórios', 'Cadastro fiscal']);
+  assert.deepEqual(labels('buyer', 'conferente'), []);
+  assert.deepEqual(labels('receiving', 'comprador'), []);
+});
+
+test('tela ativa marca apenas opção selecionada', () => {
+  const markup = render({items: sidebarOptions('receiving', 'administrador'), active: 'catalog', moduleLabel: 'Módulo de conferência', roleLabel: 'Administrador', accessLabel: 'Acesso Master'});
   assert.match(markup, /Nova conferência/);
   assert.match(markup, /<button aria-current="page">Cadastro fiscal<\/button>/);
   assert.equal((markup.match(/aria-current="page"/g) || []).length, 1);
-  assert.doesNotMatch(markup, /Configurações/);
+  const conferenteMarkup = render({items: sidebarOptions('receiving', 'conferente'), active: 'new', moduleLabel: 'Módulo de conferência', roleLabel: 'Conferente', accessLabel: 'Acesso operacional'});
+  assert.doesNotMatch(conferenteMarkup, /Cadastro fiscal/);
 });
 
 test('cartão mantém troca de módulo e saída e segue visível no mobile', async () => {
@@ -37,6 +47,8 @@ test('cartão mantém troca de módulo e saída e segue visível no mobile', asy
   const mobile = css.slice(css.indexOf('@media(max-width:700px)'));
   assert.match(mobile, /\.il-sidebar nav \{display:flex;overflow-x:auto\}/);
   assert.doesNotMatch(mobile, /\.il-sidebar-profile \{display:none\}/);
+  const receivingCss = await readFile(new URL('./receiving.css', import.meta.url), 'utf8');
+  assert.match(receivingCss, /@media\(max-width:700px\) \{\s*\.rx-app \{display:block\}/);
 });
 
 test.after(async () => vite.close());

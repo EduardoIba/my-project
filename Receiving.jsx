@@ -2,13 +2,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Barcode, ChevronDown, CircleAlert, ClipboardCheck, Download, Plus, Upload} from 'lucide-react';
 import {Catalog} from './ReceivingShared.jsx';
 import ReceivingReports, {Badge, batchLabel, NoteTable, noteLabel, Stat} from './ReceivingReports.jsx';
-import Sidebar from './Sidebar.jsx';
+import Sidebar, {sidebarOptions} from './Sidebar.jsx';
 import {accessKey, checkedQuantity, number, previewDistribution, validAccessKey} from './receivingWorkflow.js';
 import './receiving.css';
 
 export {Occurrences} from './ReceivingShared.jsx';
 
-const navigation = [['dashboard', 'Painel'], ['new', 'Nova conferência'], ['history', 'Histórico'], ['pending', 'Pendências'], ['reports', 'Relatórios']];
 const xmlLimit = 10 * 1024 * 1024;
 const fiscalNamespace = 'http://www.portalfiscal.inf.br/nfe';
 
@@ -356,7 +355,7 @@ export default function Receiving({api, role, userId, onBuyer, onSignOut, sessio
   const openNote = note => run(() => open(note));
   const {notes, products, suppliers, alerts, pending} = data;
   return <div className="rx-app">
-    <Sidebar items={[...navigation.map(([id, label]) => ({id, label})), ...(role === 'administrador' ? [{id: 'catalog', label: 'Cadastro fiscal'}] : [])]}
+    <Sidebar items={sidebarOptions('receiving', role)}
       active={screen === 'inspection' ? 'new' : screen} onNavigate={id => navigate(id)} moduleLabel="Módulo de conferência"
       roleLabel={role === 'administrador' ? 'Administrador' : 'Conferente'}
       accessLabel={role === 'administrador' ? 'Acesso Master' : 'Acesso operacional'}

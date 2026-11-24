@@ -129,8 +129,10 @@
   :where(.rx-app) .rx-note-summary {grid-template-columns:1fr 1fr}
   :where(.rx-app) .rx-guide ol {gap:13px}
 }
-@media(max-width:640px) {
+@media(max-width:700px) {
   .rx-app {display:block}
+}
+@media(max-width:640px) {
   .rx-app .rx-main {padding:19px 12px}
   .rx-app .rx-header {align-items:start; gap:10px; margin-bottom:17px}
   :where(.rx-app) .rx-header h1 {font-size:23px}
