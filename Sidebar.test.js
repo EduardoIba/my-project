@@ -48,6 +48,8 @@ test('cartão mantém troca de módulo e saída e segue visível no mobile', asy
   const mobile = css.slice(css.indexOf('@media(max-width:700px)'));
   assert.match(mobile, /\.il-sidebar nav \{display:flex;overflow-x:auto\}/);
   assert.doesNotMatch(mobile, /\.il-sidebar-profile \{display:none\}/);
+  const buyerCss = await readFile(new URL('./style.css', import.meta.url), 'utf8');
+  assert.match(buyerCss, /@media\(max-width:700px\)\{[^}]*\.app\{display:block\}/);
   const receivingCss = await readFile(new URL('./receiving.css', import.meta.url), 'utf8');
   assert.match(receivingCss, /@media\(max-width:700px\) \{\s*\.rx-app \{display:block\}/);
 });
