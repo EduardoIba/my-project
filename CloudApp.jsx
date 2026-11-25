@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { createSupabaseApi } from './supabaseApi.js';
+import { createSupabaseApi } from './src/shared/api/supabaseApi.js';
 import Receiving, { Occurrences } from './Receiving.jsx';
 import LoginScreen from './LoginScreen.jsx';
 

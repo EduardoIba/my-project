@@ -1,4 +1,4 @@
-import { DEFAULT_SUPPLIERS, getSuppliers } from './catalogs.js';
+import { DEFAULT_SUPPLIERS, getSuppliers } from './src/shared/data/catalogs.js';
 export const DEFAULT_RULES = {
   aliases: '',
 };

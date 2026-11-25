@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { printDispatch } from './dispatchPrint.js';
+import { printDispatch } from './src/shared/printing/dispatchPrint.js';
 import {
   DEFAULT_RULES,
   REVIEW_ACTIONS,

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { addSupplier, getSuppliers } from './catalogs.js';
 import { removeSeller } from './sellers.js';
-import { parseMessage } from './whatsapp.js';
+import { parseMessage } from '../../../whatsapp.js';
 const source = () => ({
   suppliers: ['Master'],
   sellers: ['Cardoso'],

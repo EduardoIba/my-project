@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { DEFAULT_SELLERS, migrateSellers } from './sellers.js';
+import { DEFAULT_SELLERS, migrateSellers } from './src/shared/data/sellers.js';
 import {
   DEFAULT_RULES,
   applyBulkItems,

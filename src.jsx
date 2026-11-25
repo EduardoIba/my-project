@@ -3,8 +3,8 @@ import Sidebar, { sidebarOptions } from './Sidebar.jsx';
 import { reconcilePurchaseEdit } from './purchaseLedger.js';
 import { purchasePeriod, purchaseReport } from './purchaseReports.js';
 import PurchaseReports, { LastPaidPrices } from './PurchaseReports.jsx';
-import { DEFAULT_SELLERS, renameSeller, removeSeller } from './sellers.js';
-import { DATA_KEY, loadDatabase, PURCHASE_RESET_VERSION } from './storage.js';
+import { DEFAULT_SELLERS, renameSeller, removeSeller } from './src/shared/data/sellers.js';
+import { DATA_KEY, loadDatabase, PURCHASE_RESET_VERSION } from './src/shared/data/storage.js';
 import BackupPanel from './BackupPanel.jsx';
 import BulkRequestActions from './BulkRequestActions.jsx';
 import { applyRequestAction } from './requestActions.js';
@@ -23,7 +23,7 @@ import {
 import WhatsAppImport from './WhatsAppImport.jsx';
 import ImportHistory from './ImportHistory.jsx';
 import { deleteRequestBatch } from './batchActions.js';
-import { printDispatch } from './dispatchPrint.js';
+import { printDispatch } from './src/shared/printing/dispatchPrint.js';
 import {
   commitImport,
   localDate,
@@ -31,7 +31,7 @@ import {
   requestBatches,
   saveManualRequest,
 } from './whatsapp.js';
-import { DEFAULT_SUPPLIERS, getSuppliers, addSupplier } from './catalogs.js';
+import { DEFAULT_SUPPLIERS, getSuppliers, addSupplier } from './src/shared/data/catalogs.js';
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './base.css';

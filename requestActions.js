@@ -1,4 +1,4 @@
-import { getSuppliers } from './catalogs.js';
+import { getSuppliers } from './src/shared/data/catalogs.js';
 import { validDate } from './whatsapp.js';
 import { validateRequest } from './purchases.js';
 import {

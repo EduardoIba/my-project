@@ -1,8 +1,8 @@
 ﻿// Run against the local app and an isolated Chromium debugging port.
 // This script creates/disposes an incognito context; it never uses the personal profile.
 import assert from 'node:assert/strict';
-import { PURCHASE_RESET_VERSION, RESET_BACKUP_KEY } from '../storage.js';
-import { DEFAULT_SELLERS } from '../sellers.js';
+import { PURCHASE_RESET_VERSION, RESET_BACKUP_KEY } from '../src/shared/data/storage.js';
+import { DEFAULT_SELLERS } from '../src/shared/data/sellers.js';
 const appUrl = process.argv[2] || 'http://127.0.0.1:5173/';
 const debugUrl = process.argv[3] || 'http://127.0.0.1:9229';
 function connect(url) {

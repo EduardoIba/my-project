@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { createInterface } from 'node:readline/promises';
 import { Writable } from 'node:stream';
-import { createSupabaseApi, loginAlias } from '../supabaseApi.js';
+import { createSupabaseApi, loginAlias } from '../src/shared/api/supabaseApi.js';
 
 const projectUrl = 'https://fqippqnarynmtxwbkurx.supabase.co';
 const masterId = '5366f3fe-a2f7-4150-8c70-985f9097b4e0';
