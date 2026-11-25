@@ -153,13 +153,8 @@ export default function CloudApp({Buyer, url, publishableKey}) {
   if (section === 'receiving') return <Receiving api={api} role={role} userId={session.user?.id}
     onBuyer={role === 'administrador' ? () => setSection('buyer') : undefined} onSignOut={signOut} sessionError={error}/>;
 
-  return <Buyer cloudData={workspace} saveCloud={saveBuyer} sessionError={error}
-    sessionNavigation={<nav className="buy-session-nav" aria-label="Módulos e sessão">
-      {role === 'administrador' && <>
-        <span aria-current="page">Compras</span>
-        <button onClick={() => setSection('receiving')}>Conferência de NF-e</button>
-      </>}
-      <button onClick={signOut}>Sair</button>
-    </nav>}
+  return <Buyer cloudData={workspace} saveCloud={saveBuyer} role={role}
+    onModuleSwitch={role === 'administrador' ? () => setSection('receiving') : undefined}
+    onSignOut={signOut} sessionError={error}
     occurrences={<Occurrences alerts={workspace.alerts || []} onResolve={resolve}/>}/>;
 }

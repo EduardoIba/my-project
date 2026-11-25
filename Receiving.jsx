@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ArrowRight, Barcode, ChevronDown, CircleAlert, ClipboardCheck, Download, Plus, Upload} from 'lucide-react';
+import {Barcode, ChevronDown, CircleAlert, ClipboardCheck, Download, Plus, Upload} from 'lucide-react';
 import {Catalog} from './ReceivingShared.jsx';
 import ReceivingReports, {Badge, batchLabel, NoteTable, noteLabel, Stat} from './ReceivingReports.jsx';
+import Sidebar, {sidebarOptions} from './Sidebar.jsx';
 import {accessKey, checkedQuantity, number, previewDistribution, validAccessKey} from './receivingWorkflow.js';
 import './receiving.css';
 
 export {Occurrences} from './ReceivingShared.jsx';
 
-const navigation = [['dashboard', 'Painel'], ['new', 'Nova conferência'], ['history', 'Histórico'], ['pending', 'Pendências'], ['reports', 'Relatórios']];
 const xmlLimit = 10 * 1024 * 1024;
 const fiscalNamespace = 'http://www.portalfiscal.inf.br/nfe';
 
@@ -354,20 +354,13 @@ export default function Receiving({api, role, userId, onBuyer, onSignOut, sessio
   });
   const openNote = note => run(() => open(note));
   const {notes, products, suppliers, alerts, pending} = data;
-  const profile = role === 'administrador' ? 'Administrador' : 'Conferente';
   return <div className="rx-app">
-    <aside className="rx-sidebar">
-      <div className="rx-brand"><span>IL</span><div><strong>IMPORT LASER</strong><small>Gestão de Compras</small></div></div>
-      <nav aria-label="Módulo de conferência">{navigation.map(([id, label]) =>
-        <button key={id} aria-current={(screen === id || (screen === 'inspection' && id === 'new')) ? 'page' : undefined}
-          onClick={() => navigate(id)} disabled={busy}>{label}</button>)}
-        {role === 'administrador' && <button aria-current={screen === 'catalog' ? 'page' : undefined} onClick={() => navigate('catalog')} disabled={busy}>Cadastro fiscal</button>}
-      </nav>
-      <p className="rx-sidebar-label">Módulo de conferência</p>
-      <div className="rx-profile">{onBuyer && <button onClick={() => {if (canLeave()) onBuyer();}} disabled={busy}>Compras <ArrowRight size={14}/></button>}
-        <div><span>{profile}<small>{role === 'administrador' ? 'Acesso Master' : 'Acesso operacional'}</small></span><button onClick={() => {if (canLeave()) onSignOut();}} disabled={busy}>Sair</button></div>
-      </div>
-    </aside>
+    <Sidebar items={sidebarOptions('receiving', role)}
+      active={screen === 'inspection' ? 'new' : screen} onNavigate={id => navigate(id)} moduleLabel="Módulo de conferência"
+      roleLabel={role === 'administrador' ? 'Administrador' : 'Conferente'}
+      accessLabel={role === 'administrador' ? 'Acesso Master' : 'Acesso operacional'}
+      switchLabel={onBuyer ? 'Compras' : undefined} onSwitch={() => {if (canLeave()) onBuyer();}}
+      onSignOut={() => {if (canLeave()) onSignOut();}} disabled={busy}/>
     <main className="rx-main" aria-busy={loading || busy}>
       {(error || sessionError) && <div className="rx-message rx-message-error" role="alert"><CircleAlert size={18}/>{error || sessionError}</div>}
       {feedback && <div className="rx-message rx-message-ok" role="status"><ClipboardCheck size={18}/>{feedback}</div>}

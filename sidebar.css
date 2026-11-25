@@ -1,0 +1,34 @@
+.il-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  width: 232px;
+  flex: 0 0 232px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 12px;
+  background: #11213a;
+  color: #fff;
+}
+.il-sidebar-brand {display:flex;align-items:center;gap:10px;padding:4px 5px 28px}
+.il-sidebar-brand>span {display:grid;place-items:center;width:36px;height:40px;flex:none;border-radius:10px;background:#146fe5;font-size:13px;font-weight:800}
+.il-sidebar-brand strong {display:block;font-size:13px}
+.il-sidebar-brand small,.il-sidebar-profile small {display:block;margin-top:4px;color:#b8c9e1;font-size:11px}
+.il-sidebar nav {display:grid;gap:4px}
+.il-sidebar nav button {width:100%;padding:12px 13px;border:0;border-radius:9px;background:transparent;color:#f5f8fe;text-align:left;font-size:13px;font-weight:500}
+.il-sidebar nav button[aria-current],.il-sidebar nav button:hover {background:#293e5d;color:#fff}
+.il-sidebar-label {margin:34px 12px 16px;color:#b4c5de;font-size:10px;text-transform:uppercase}
+.il-sidebar-profile {margin-top:auto;border-radius:9px;background:#293e5d;padding:10px 12px;font-size:12px}
+.il-sidebar-profile>div {display:flex;align-items:center;justify-content:space-between;gap:8px}
+.il-sidebar-profile button {display:inline-flex;align-items:center;gap:7px;padding:5px 0;border:0;background:none;color:#f1f6ff;font-size:12px}
+.il-sidebar-profile .il-sidebar-switch {width:100%;justify-content:space-between;margin-bottom:7px;border-bottom:1px solid #ffffff25;padding-bottom:8px}
+.il-sidebar-profile button:hover {text-decoration:underline}
+.il-sidebar :focus-visible {outline:2px solid #7db2ff;outline-offset:3px}
+@media(max-width:700px) {
+  .il-sidebar {position:relative;top:auto;height:auto;width:100%;flex-basis:auto;padding:12px}
+  .il-sidebar-brand {padding:4px 4px 12px}
+  .il-sidebar nav {display:flex;overflow-x:auto}
+  .il-sidebar nav button {width:auto;flex:none;white-space:nowrap;padding:10px}
+  .il-sidebar-label {display:none}
+  .il-sidebar-profile {margin-top:10px}
+}
