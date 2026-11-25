@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+coverage/
+.specs/
+.playwright-mcp/
+.env*
+supabase/**/*.sql
+schema.sql

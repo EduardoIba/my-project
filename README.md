@@ -144,9 +144,7 @@ No Painel, digite o produto ou SKU no campo Pesquisar. A seção Último preço 
 
 A referência vem dos lançamentos de compras efetivadas, inclusive parcelas, excluindo pendentes, cancelados e parcelas desfeitas. Não usa cotação, custo médio da solicitação nem soma financeira. O cartão de despesas continua separado, com o nome Total gasto no período. Compras na mesma data com preços diferentes e sem horário suficiente são sinalizadas, exibindo os valores possíveis em vez de inventar qual foi o último. Registros sem data também são identificados. A consulta não altera preços cadastrados nem registros.
 
-
 Impressão e exclusão por solicitação: use Imprimir no lote aberto ou no histórico. A folha contém todos os itens do lote, inclusive comprados, com fornecedor, vendedor, cliente, quantidade solicitada e descrição, sem valores. Cada fornecedor começa em nova página. Os filtros da tabela não limitam essa impressão. Excluir solicitação inteira exige confirmação com a quantidade total de itens e o valor retirado dos indicadores; remove também o histórico de compra desses itens, preservando outros lotes e cadastros. Registros antigos sem origem identificada continuam com exclusão individual. A numeração dos lotes não é reutilizada após exclusão.
 Validação: 84 testes automatizados, teste de interface em Chrome isolado e npm run build concluídos.
-
 
 Equivalência permanente de demanda: descrições de toner/cartucho TN2340, completas (TN2340/TN2370/TN630/TN660 2.6K) ou curtas, com C/ ou P/, hífens ou diferenças de caixa, são somadas no ranking de itens mais comprados. A regra fica no código purchaseReports.js e se aplica automaticamente a compras antigas e futuras, sem modificar registros originais. Chips e fotocondutores continuam separados.
