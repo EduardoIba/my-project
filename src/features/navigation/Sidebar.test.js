@@ -10,7 +10,9 @@ const vite = await createServer({
   appType: 'custom',
   server: { middlewareMode: true },
 });
-const { default: Sidebar, sidebarOptions } = await vite.ssrLoadModule('/Sidebar.jsx');
+const { default: Sidebar, sidebarOptions } = await vite.ssrLoadModule(
+  '/src/features/navigation/Sidebar.jsx',
+);
 const render = (props) => renderToStaticMarkup(React.createElement(Sidebar, props));
 
 test('Compras e Conferência compartilham estrutura e identidade de sidebar', () => {
@@ -116,9 +118,12 @@ test('cartão mantém troca de módulo e saída e segue visível no mobile', asy
   const mobile = css.slice(css.indexOf('@media (max-width: 700px)'));
   assert.match(mobile, /\.il-sidebar nav\s*\{\s*display:\s*flex;\s*overflow-x:\s*auto;\s*\}/);
   assert.doesNotMatch(mobile, /\.il-sidebar-profile\s*\{\s*display:\s*none\s*\}/);
-  const buyerCss = await readFile(new URL('./src/styles/style.css', import.meta.url), 'utf8');
+  const buyerCss = await readFile(new URL('../../styles/style.css', import.meta.url), 'utf8');
   assert.match(buyerCss, /@media\s*\(max-width:\s*700px\)\s*\{[^}]*\.app\s*\{\s*display:\s*block;/);
-  const receivingCss = await readFile(new URL('./receiving.css', import.meta.url), 'utf8');
+  const receivingCss = await readFile(
+    new URL('../receiving/components/receiving.css', import.meta.url),
+    'utf8',
+  );
   assert.match(
     receivingCss,
     /@media\s*\(max-width:\s*700px\)\s*\{\s*\.rx-app\s*\{\s*display:\s*block;/,

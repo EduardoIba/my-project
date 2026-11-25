@@ -1,5 +1,5 @@
 import CloudApp from './CloudApp.jsx';
-import Sidebar, { sidebarOptions } from '../../Sidebar.jsx';
+import Sidebar, { sidebarOptions } from '../features/navigation/Sidebar.jsx';
 import { reconcilePurchaseEdit } from '../features/purchases/domain/purchaseLedger.js';
 import { purchasePeriod, purchaseReport } from '../features/purchases/domain/purchaseReports.js';
 import PurchaseReports, {

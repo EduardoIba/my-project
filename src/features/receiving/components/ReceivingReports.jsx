@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Download, FileSpreadsheet, Search } from 'lucide-react';
-import { exportCsv, number } from './receivingWorkflow.js';
+import { exportCsv, number } from '../domain/receivingWorkflow.js';
 
 const date = (value) => (value ? new Date(value).toLocaleDateString('pt-BR') : '—');
 export const batchLabel = (value) => 'Lote ' + String(value).padStart(3, '0');

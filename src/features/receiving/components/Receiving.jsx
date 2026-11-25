@@ -16,14 +16,14 @@ import ReceivingReports, {
   noteLabel,
   Stat,
 } from './ReceivingReports.jsx';
-import Sidebar, { sidebarOptions } from './Sidebar.jsx';
+import Sidebar, { sidebarOptions } from '../../navigation/Sidebar.jsx';
 import {
   accessKey,
   checkedQuantity,
   number,
   previewDistribution,
   validAccessKey,
-} from './receivingWorkflow.js';
+} from '../domain/receivingWorkflow.js';
 import './receiving.css';
 
 export { Occurrences } from './ReceivingShared.jsx';

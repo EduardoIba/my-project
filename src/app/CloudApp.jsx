@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createSupabaseApi } from '../shared/api/supabaseApi.js';
-import Receiving, { Occurrences } from '../../Receiving.jsx';
-import LoginScreen from '../../LoginScreen.jsx';
+import Receiving, { Occurrences } from '../features/receiving/components/Receiving.jsx';
+import LoginScreen from '../features/auth/LoginScreen.jsx';
 
 const sessionKey = 'importlaser-supabase-session';
 
