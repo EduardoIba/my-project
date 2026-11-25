@@ -12,7 +12,7 @@ import {
   LEGACY_BATCH,
 } from './whatsapp.js';
 import { purchaseReport } from './purchaseReports.js';
-import { loadDatabase, DATA_KEY, PURCHASE_RESET_VERSION } from './src/shared/data/storage.js';
+import { loadDatabase, DATA_KEY, PURCHASE_RESET_VERSION } from '../../../shared/data/storage.js';
 const empty = () => ({
   purchaseResetVersion: PURCHASE_RESET_VERSION,
   sellers: ['Cardoso'],

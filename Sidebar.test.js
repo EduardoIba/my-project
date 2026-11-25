@@ -116,7 +116,7 @@ test('cartão mantém troca de módulo e saída e segue visível no mobile', asy
   const mobile = css.slice(css.indexOf('@media (max-width: 700px)'));
   assert.match(mobile, /\.il-sidebar nav\s*\{\s*display:\s*flex;\s*overflow-x:\s*auto;\s*\}/);
   assert.doesNotMatch(mobile, /\.il-sidebar-profile\s*\{\s*display:\s*none\s*\}/);
-  const buyerCss = await readFile(new URL('./style.css', import.meta.url), 'utf8');
+  const buyerCss = await readFile(new URL('./src/styles/style.css', import.meta.url), 'utf8');
   assert.match(buyerCss, /@media\s*\(max-width:\s*700px\)\s*\{[^}]*\.app\s*\{\s*display:\s*block;/);
   const receivingCss = await readFile(new URL('./receiving.css', import.meta.url), 'utf8');
   assert.match(

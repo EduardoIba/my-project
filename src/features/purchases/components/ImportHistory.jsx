@@ -1,5 +1,5 @@
 import React from 'react';
-import { requestBatches } from './whatsapp.js';
+import { requestBatches } from '../domain/whatsapp.js';
 export default function ImportHistory({
   db,
   visibleRows,

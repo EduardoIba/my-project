@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BACKUP_KEY, RESET_BACKUP_KEY, downloadJson } from './src/shared/data/storage.js';
+import { BACKUP_KEY, RESET_BACKUP_KEY, downloadJson } from '../../../shared/data/storage.js';
 
 export default function BackupPanel({ db, cloud = false }) {
   const [feedback, setFeedback] = useState('');

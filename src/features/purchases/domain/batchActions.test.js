@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { deleteRequestBatch } from './batchActions.js';
 import { requestBatches, nextBatchSequence } from './whatsapp.js';
-import { buildDispatchPrintHtml } from './src/shared/printing/dispatchPrint.js';
+import { buildDispatchPrintHtml } from '../../../shared/printing/dispatchPrint.js';
 const db = {
   suppliers: ['Master'],
   sellers: ['Luiz'],

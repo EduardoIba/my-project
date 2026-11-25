@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { DEFAULT_SELLERS, migrateSellers } from './src/shared/data/sellers.js';
+import { DEFAULT_SELLERS, migrateSellers } from '../../../shared/data/sellers.js';
 import {
   DEFAULT_RULES,
   applyBulkItems,
@@ -271,7 +271,7 @@ test('Não salva com campos inválidos ou lista vazia; revisão textual é opcio
 });
 
 const digitalMessage = readFileSync(
-  new URL('./fixtures/digital-message.txt', import.meta.url),
+  new URL('../../../../fixtures/digital-message.txt', import.meta.url),
   'utf8',
 );
 test('DIGITAL EMPREENDIMENTO: três produtos, cliente livre e apenas fornecedor/vendedor pendentes', () => {

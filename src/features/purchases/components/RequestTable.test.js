@@ -5,8 +5,8 @@ import { createRequire } from 'node:module';
 import { transformSync } from 'esbuild';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { purchasedValue, purchaseDateLabel } from './purchases.js';
-import { orderStage } from './orderWorkflow.js';
+import { purchasedValue, purchaseDateLabel } from '../domain/purchases.js';
+import { orderStage } from '../domain/orderWorkflow.js';
 
 // Render the real JSX component with the existing Vite/esbuild dependency.
 const compiled = transformSync(
@@ -17,9 +17,9 @@ const require = createRequire(import.meta.url);
 const output = { exports: {} };
 new Function('require', 'module', 'exports', compiled)(
   (name) =>
-    name === './purchases.js'
+    name === '../domain/purchases.js'
       ? { purchasedValue, purchaseDateLabel }
-      : name === './orderWorkflow.js'
+      : name === '../domain/orderWorkflow.js'
         ? { orderStage }
         : require(name),
   output,

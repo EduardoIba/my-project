@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { printDispatch } from './src/shared/printing/dispatchPrint.js';
+import { printDispatch } from '../../../shared/printing/dispatchPrint.js';
 import {
   DEFAULT_RULES,
   REVIEW_ACTIONS,
@@ -13,7 +13,7 @@ import {
   parseMessage,
   previewTotal,
   supplierAliases,
-} from './whatsapp.js';
+} from '../domain/whatsapp.js';
 
 const money = (n) => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 

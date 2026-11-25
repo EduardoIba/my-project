@@ -1,16 +1,21 @@
 import CloudApp from './CloudApp.jsx';
-import Sidebar, { sidebarOptions } from './Sidebar.jsx';
-import { reconcilePurchaseEdit } from './purchaseLedger.js';
-import { purchasePeriod, purchaseReport } from './purchaseReports.js';
-import PurchaseReports, { LastPaidPrices } from './PurchaseReports.jsx';
-import { DEFAULT_SELLERS, renameSeller, removeSeller } from './src/shared/data/sellers.js';
-import { DATA_KEY, loadDatabase, PURCHASE_RESET_VERSION } from './src/shared/data/storage.js';
-import BackupPanel from './BackupPanel.jsx';
-import BulkRequestActions from './BulkRequestActions.jsx';
-import { applyRequestAction } from './requestActions.js';
-import { confirmGeneratedOrders, returnOrderToWaiting } from './orderWorkflow.js';
-import Table from './RequestTable.jsx';
-import OrderMessages from './OrderMessages.jsx';
+import Sidebar, { sidebarOptions } from '../../Sidebar.jsx';
+import { reconcilePurchaseEdit } from '../features/purchases/domain/purchaseLedger.js';
+import { purchasePeriod, purchaseReport } from '../features/purchases/domain/purchaseReports.js';
+import PurchaseReports, {
+  LastPaidPrices,
+} from '../features/purchases/components/PurchaseReports.jsx';
+import { DEFAULT_SELLERS, renameSeller, removeSeller } from '../shared/data/sellers.js';
+import { DATA_KEY, loadDatabase, PURCHASE_RESET_VERSION } from '../shared/data/storage.js';
+import BackupPanel from '../features/purchases/components/BackupPanel.jsx';
+import BulkRequestActions from '../features/purchases/components/BulkRequestActions.jsx';
+import { applyRequestAction } from '../features/purchases/domain/requestActions.js';
+import {
+  confirmGeneratedOrders,
+  returnOrderToWaiting,
+} from '../features/purchases/domain/orderWorkflow.js';
+import Table from '../features/purchases/components/RequestTable.jsx';
+import OrderMessages from '../features/purchases/components/OrderMessages.jsx';
 import {
   generateOrders,
   isPurchased,
@@ -19,23 +24,23 @@ import {
   summarizePurchases,
   statusForQuantity,
   validateRequest,
-} from './purchases.js';
-import WhatsAppImport from './WhatsAppImport.jsx';
-import ImportHistory from './ImportHistory.jsx';
-import { deleteRequestBatch } from './batchActions.js';
-import { printDispatch } from './src/shared/printing/dispatchPrint.js';
+} from '../features/purchases/domain/purchases.js';
+import WhatsAppImport from '../features/purchases/components/WhatsAppImport.jsx';
+import ImportHistory from '../features/purchases/components/ImportHistory.jsx';
+import { deleteRequestBatch } from '../features/purchases/domain/batchActions.js';
+import { printDispatch } from '../shared/printing/dispatchPrint.js';
 import {
   commitImport,
   localDate,
   requestBatchId,
   requestBatches,
   saveManualRequest,
-} from './whatsapp.js';
-import { DEFAULT_SUPPLIERS, getSuppliers, addSupplier } from './src/shared/data/catalogs.js';
+} from '../features/purchases/domain/whatsapp.js';
+import { DEFAULT_SUPPLIERS, getSuppliers, addSupplier } from '../shared/data/catalogs.js';
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import './base.css';
-import './style.css';
+import '../styles/base.css';
+import '../styles/style.css';
 const currency = (n) =>
   Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const today = localDate;

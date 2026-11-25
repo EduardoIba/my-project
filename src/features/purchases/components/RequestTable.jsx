@@ -1,6 +1,6 @@
 import React from 'react';
-import { purchasedValue, purchaseDateLabel } from './purchases.js';
-import { orderStage } from './orderWorkflow.js';
+import { purchasedValue, purchaseDateLabel } from '../domain/purchases.js';
+import { orderStage } from '../domain/orderWorkflow.js';
 const currency = (n) =>
   Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { boughtQuantity, purchasePlan, registeredPrice } from './purchaseLedger.js';
-import { makeId } from './whatsapp.js';
+import { boughtQuantity, purchasePlan, registeredPrice } from '../domain/purchaseLedger.js';
+import { makeId } from '../domain/whatsapp.js';
 const currency = (value) =>
   Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
