@@ -2,6 +2,23 @@
 
 Aplicativo React + Vite em português. O ambiente de desenvolvimento conecta Compras e Conferência de NF-e ao Supabase de testes. Sem variáveis de conexão, o aplicativo abre o modo local de Compras.
 
+## Organização do projeto
+
+- `src/app`: entrada React e composição de sessão/módulos.
+- `src/features/purchases` e `src/features/receiving`: telas, regras e testes de cada fluxo; autenticação e navegação ficam em `src/features/auth` e `src/features/navigation`.
+- `src/shared`: API, dados compartilhados e impressão; `src/styles`: estilos globais.
+- `scripts`: provisionamento e verificações de interface; `supabase/migrations` e `supabase/tests`: histórico e testes SQL.
+- `docs/database/schema.sql`: proposta antiga de schema; `fixtures`: dados de entrada usados pelos testes.
+
+Use Prettier para manter arquivos de código e documentação no padrão do projeto:
+
+```powershell
+npm.cmd run format
+npm.cmd run format:check
+```
+
+As migrações e demais arquivos SQL existentes são mantidos sem reformatar.
+
 ## Executar
 
 ```powershell
@@ -45,7 +62,7 @@ Em **Conferência de NF-e → Cadastro fiscal**, um administrador vincula o CNPJ
 
 ### Dados e regras
 
-- As migrações em `supabase/migrations` correspondem ao histórico do projeto remoto. O arquivo `schema.sql` é a proposta antiga.
+- As migrações em `supabase/migrations` correspondem ao histórico do projeto remoto. O arquivo `docs/database/schema.sql` é a proposta antiga.
 - Os lotes mantêm sequência e posições gravadas na confirmação. O banco usa a mesma alocação para as visões **Por produto** e **Por cliente**. Compras financeiras e recebimentos físicos têm registros e saldos próprios.
 - A interface de Compras mantém seus formatos existentes. As RPCs gravam lotes, solicitações e parcelas nas tabelas relacionais. Uma revisão impede que uma sessão desatualizada sobrescreva outra. Exclusões confirmadas arquivam apenas os IDs selecionados e preservam o histórico financeiro e de auditoria.
 - O XML original fica na tabela privada `invoice_xml_sources`. A importação valida a estrutura lida, campos obrigatórios, formato e dígito da chave, CNPJ do emitente e duplicidade. A autorização fiscal, a assinatura digital e a validação XSD completa ficam fora desta integração.
@@ -54,7 +71,7 @@ Em **Conferência de NF-e → Cadastro fiscal**, um administrador vincula o CNPJ
 
 ### Testes
 
-Execute `npm.cmd test` e `npm.cmd run build -- --mode development`. O teste em `supabase/tests/workflow.sql` usa dados fictícios em uma transação com rollback. Execute-o apenas no projeto de testes vazio. Ele verifica bloqueios de acesso, revisão concorrente, saldo entre notas, correção de parcelas, prioridade e idempotência.
+Execute `npm.cmd test`, `npm.cmd run build -- --mode development` e `npm.cmd run format:check`. O teste em `supabase/tests/workflow.sql` usa dados fictícios em uma transação com rollback. Execute-o apenas no projeto de testes vazio. Ele verifica bloqueios de acesso, revisão concorrente, saldo entre notas, correção de parcelas, prioridade e idempotência.
 
 O teste em `supabase/tests/master_login.sql` verifica a reserva do alias, a atribuição do perfil Master e as permissões RLS dos três perfis em uma transação com rollback.
 O teste `node scripts/check-login-ui.mjs [URL do aplicativo] [URL de depuração]` usa um Chrome isolado e respostas Supabase simuladas para verificar login, troca de módulo, leitura de chave, importação alternativa, rascunho, finalização, distribuição, relatórios e largura móvel.
