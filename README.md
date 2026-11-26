@@ -2,6 +2,23 @@
 
 Aplicativo React + Vite em português. O ambiente de desenvolvimento conecta Compras e Conferência de NF-e ao Supabase de testes. Sem variáveis de conexão, o aplicativo abre o modo local de Compras.
 
+## Organização do projeto
+
+- `src/app`: entrada React e composição de sessão/módulos.
+- `src/features/purchases` e `src/features/receiving`: telas, regras e testes de cada fluxo; autenticação e navegação ficam em `src/features/auth` e `src/features/navigation`.
+- `src/shared`: API, dados compartilhados e impressão; `src/styles`: estilos globais.
+- `scripts`: provisionamento e verificações de interface; `supabase/migrations` e `supabase/tests`: histórico e testes SQL.
+- `docs/database/schema.sql`: proposta antiga de schema; `fixtures`: dados de entrada usados pelos testes.
+
+Use Prettier para manter arquivos de código e documentação no padrão do projeto:
+
+```powershell
+npm.cmd run format
+npm.cmd run format:check
+```
+
+As migrações e demais arquivos SQL existentes são mantidos sem reformatar.
+
 ## Executar
 
 ```powershell
@@ -45,7 +62,7 @@ Em **Conferência de NF-e → Cadastro fiscal**, um administrador vincula o CNPJ
 
 ### Dados e regras
 
-- As migrações em `supabase/migrations` correspondem ao histórico do projeto remoto. O arquivo `schema.sql` é a proposta antiga.
+- As migrações em `supabase/migrations` correspondem ao histórico do projeto remoto. O arquivo `docs/database/schema.sql` é a proposta antiga.
 - Os lotes mantêm sequência e posições gravadas na confirmação. O banco usa a mesma alocação para as visões **Por produto** e **Por cliente**. Compras financeiras e recebimentos físicos têm registros e saldos próprios.
 - A interface de Compras mantém seus formatos existentes. As RPCs gravam lotes, solicitações e parcelas nas tabelas relacionais. Uma revisão impede que uma sessão desatualizada sobrescreva outra. Exclusões confirmadas arquivam apenas os IDs selecionados e preservam o histórico financeiro e de auditoria.
 - O XML original fica na tabela privada `invoice_xml_sources`. A importação valida a estrutura lida, campos obrigatórios, formato e dígito da chave, CNPJ do emitente e duplicidade. A autorização fiscal, a assinatura digital e a validação XSD completa ficam fora desta integração.
@@ -54,7 +71,7 @@ Em **Conferência de NF-e → Cadastro fiscal**, um administrador vincula o CNPJ
 
 ### Testes
 
-Execute `npm.cmd test` e `npm.cmd run build -- --mode development`. O teste em `supabase/tests/workflow.sql` usa dados fictícios em uma transação com rollback. Execute-o apenas no projeto de testes vazio. Ele verifica bloqueios de acesso, revisão concorrente, saldo entre notas, correção de parcelas, prioridade e idempotência.
+Execute `npm.cmd test`, `npm.cmd run build -- --mode development` e `npm.cmd run format:check`. O teste em `supabase/tests/workflow.sql` usa dados fictícios em uma transação com rollback. Execute-o apenas no projeto de testes vazio. Ele verifica bloqueios de acesso, revisão concorrente, saldo entre notas, correção de parcelas, prioridade e idempotência.
 
 O teste em `supabase/tests/master_login.sql` verifica a reserva do alias, a atribuição do perfil Master e as permissões RLS dos três perfis em uma transação com rollback.
 O teste `node scripts/check-login-ui.mjs [URL do aplicativo] [URL de depuração]` usa um Chrome isolado e respostas Supabase simuladas para verificar login, troca de módulo, leitura de chave, importação alternativa, rascunho, finalização, distribuição, relatórios e largura móvel.
@@ -144,9 +161,7 @@ No Painel, digite o produto ou SKU no campo Pesquisar. A seção Último preço 
 
 A referência vem dos lançamentos de compras efetivadas, inclusive parcelas, excluindo pendentes, cancelados e parcelas desfeitas. Não usa cotação, custo médio da solicitação nem soma financeira. O cartão de despesas continua separado, com o nome Total gasto no período. Compras na mesma data com preços diferentes e sem horário suficiente são sinalizadas, exibindo os valores possíveis em vez de inventar qual foi o último. Registros sem data também são identificados. A consulta não altera preços cadastrados nem registros.
 
-
 Impressão e exclusão por solicitação: use Imprimir no lote aberto ou no histórico. A folha contém todos os itens do lote, inclusive comprados, com fornecedor, vendedor, cliente, quantidade solicitada e descrição, sem valores. Cada fornecedor começa em nova página. Os filtros da tabela não limitam essa impressão. Excluir solicitação inteira exige confirmação com a quantidade total de itens e o valor retirado dos indicadores; remove também o histórico de compra desses itens, preservando outros lotes e cadastros. Registros antigos sem origem identificada continuam com exclusão individual. A numeração dos lotes não é reutilizada após exclusão.
 Validação: 84 testes automatizados, teste de interface em Chrome isolado e npm run build concluídos.
-
 
 Equivalência permanente de demanda: descrições de toner/cartucho TN2340, completas (TN2340/TN2370/TN630/TN660 2.6K) ou curtas, com C/ ou P/, hífens ou diferenças de caixa, são somadas no ranking de itens mais comprados. A regra fica no código purchaseReports.js e se aplica automaticamente a compras antigas e futuras, sem modificar registros originais. Chips e fotocondutores continuam separados.
